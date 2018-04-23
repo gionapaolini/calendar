@@ -6,6 +6,16 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
 
+/*
+ *
+ * Repeat a task every nth day
+ *
+ * Examples:
+ *  RepeatEveryDays(3)
+ *
+ *  The task will be repeated every 3 days
+ *
+ * */
 
 public class RepeatEveryDays implements RepeatRule {
 

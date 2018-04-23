@@ -8,7 +8,7 @@ import java.time.temporal.TemporalAdjusters;
 
 /*
  *
- * Repeat a task every nth occurrence of a weekday
+ * Repeat a task every nth occurrence of a weekday in a month
  *
  * Examples:
  *

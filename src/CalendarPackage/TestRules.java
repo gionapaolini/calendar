@@ -2,7 +2,6 @@ package CalendarPackage;
 
 
 import CalendarPackage.RepeatRules.RepeatEveryMonths;
-import CalendarPackage.RepeatRules.RepeatEveryWeeks;
 import CalendarPackage.RepeatRules.RepeatRule;
 
 import java.time.LocalDate;

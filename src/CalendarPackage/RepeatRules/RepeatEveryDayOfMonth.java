@@ -11,7 +11,7 @@ import java.time.LocalDate;
 * Examples:
 *  RepeatEveryDayOfMonth(10)
 *
-*  Every 10th day of the month the task will be repeated
+*  The task will be repeated every 10th day of the month
 *                      -> 10th of Jan, 10th of Feb, 10th of March ...
 *
 *

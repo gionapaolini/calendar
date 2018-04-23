@@ -5,6 +5,18 @@ import CalendarPackage.Day;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 
+/*
+ *
+ * Repeat a task every nth week
+ *
+ * Examples:
+ *  RepeatEveryWeeks(3)
+ *
+ *  The task will be repeated every 3 weeks
+ *
+ *
+ * */
+
 public class RepeatEveryWeeks implements RepeatRule {
 
     int nWeeks;

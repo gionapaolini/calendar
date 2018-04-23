@@ -15,11 +15,6 @@ import java.time.temporal.ChronoUnit;
  *
  *  The task will be repeated every 3 months (on the same day)
  *
- *  Examples:
- *  RepeatEveryMonths(3)
- *
- *  The task will be repeated every 3 months
- *
  *
  *  NOTICE:
  *  The task will not be repeated in months in which the day is not present (for example, day 31 as start date will always skip February)
