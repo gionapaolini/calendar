@@ -1,7 +1,33 @@
-package CalendarPackage;
+package CalendarPackage.RepeatRules;
+
+import CalendarPackage.Day;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+
+
+/*
+ *
+ * Repeat a task every nth month
+ *
+ * Examples:
+ *  RepeatEveryMonths(3)
+ *
+ *  The task will be repeated every 3 months (on the same day)
+ *
+ *  Examples:
+ *  RepeatEveryMonths(3)
+ *
+ *  The task will be repeated every 3 months
+ *
+ *
+ *  NOTICE:
+ *  The task will not be repeated in months in which the day is not present (for example, day 31 as start date will always skip February)
+ *
+ *
+ * */
+
+
 
 public class RepeatEveryMonths implements RepeatRule {
 

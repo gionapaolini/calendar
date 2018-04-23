@@ -1,7 +1,23 @@
-package CalendarPackage;
+package CalendarPackage.RepeatRules;
+
+import CalendarPackage.Day;
 
 import java.time.LocalDate;
-import java.time.MonthDay;
+
+/*
+*
+* Repeat a task every nth day of the month
+*
+* Examples:
+*  RepeatEveryDayOfMonth(10)
+*
+*  Every 10th day of the month the task will be repeated
+*                      -> 10th of Jan, 10th of Feb, 10th of March ...
+*
+*
+* */
+
+
 
 public class RepeatEveryDayOfMonth implements RepeatRule {
 

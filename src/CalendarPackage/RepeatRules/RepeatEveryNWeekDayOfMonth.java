@@ -1,8 +1,28 @@
-package CalendarPackage;
+package CalendarPackage.RepeatRules;
+
+import CalendarPackage.Day;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
+
+/*
+ *
+ * Repeat a task every nth occurrence of a weekday
+ *
+ * Examples:
+ *
+ *  RepeatEveryNWeekDayOfMonth(Tuesday, 2)
+ *
+ *  The task will be repeated every 2nd Tuesday of the month
+
+ *  RepeatEveryNWeekDayOfMonth(Tuesday, -2)
+ *
+ *  The task will be repeated every last 2nd Tuesday of the month
+ *
+ * */
+
+
 
 public class RepeatEveryNWeekDayOfMonth implements RepeatRule {
 
