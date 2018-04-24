@@ -53,7 +53,7 @@ public class RepeatEveryWeeks implements RepeatRule {
         LocalDate temp = startDate.plusWeeks(nWeeks);
         while (!temp.isAfter(endDate)){
             dates.add(temp);
-            temp = startDate.plusWeeks(nWeeks);
+            temp = temp.plusWeeks(nWeeks);
         }
 
         return dates;

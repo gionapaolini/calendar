@@ -21,11 +21,12 @@ public class ScheduledTask extends Event{
     private List<Day> days;
 
 
-    public ScheduledTask(String name, String description, float importance, int minDuration) {
+    public ScheduledTask(String name, String description, float importance, int minDuration, LocalTime time) {
         super(name, description, importance);
         this.minDuration = minDuration;
         this.startDate = LocalDate.now();
         days = new ArrayList<>();
+        this.time=time;
     }
 
     public int getMinDuration() {
@@ -141,5 +142,78 @@ public class ScheduledTask extends Event{
 
     public List<Day> getDays() {
         return days;
+    }
+
+    public List<LocalDateTime> getAllDates(LocalDate endOfCalendar){
+        System.out.println("HERE");
+
+        List<LocalDate> fromRules = null;
+        List<LocalDate> fromException = null;
+
+        if(repeatRules!=null){
+            fromRules = new ArrayList<>();
+            for(RepeatRule rule: repeatRules){
+                fromRules.addAll(rule.getValidDates(startDate,endOfCalendar));
+            }
+        }
+        if(exceptionRules!=null){
+            fromException = new ArrayList<>();
+            for(RepeatRule rule: exceptionRules){
+                fromException.addAll(rule.getValidDates(startDate,endOfCalendar));
+            }
+        }
+
+
+
+
+
+
+        List<LocalDateTime> goodDates = new ArrayList<>();
+        if(specificDates!=null){
+            goodDates.addAll(specificDates);
+        }
+
+        if((fromRules != null) && (fromException !=null)) {
+            checkException:
+            for (LocalDate date1 : fromRules) {
+
+                for (LocalDate date2 : fromException) {
+                    if (date1.isEqual(date2)) {
+                        continue checkException;
+                    }
+                }
+
+                goodDates.add(LocalDateTime.of(date1, time));
+            }
+
+        }else if(fromRules!=null){
+            for (LocalDate date : fromRules) {
+                goodDates.add(LocalDateTime.of(date, time));
+            }
+        }
+
+        List<LocalDateTime> finalDates = new ArrayList<>();
+
+        if(specificException!=null){
+            checkException2:
+            for(LocalDateTime date: goodDates) {
+
+                for (LocalDateTime date2 : specificException) {
+                    if (date.isEqual(date2)) {
+                        continue checkException2;
+                    }
+                }
+
+                finalDates.add(date);
+            }
+
+        }else {
+            finalDates = goodDates;
+        }
+
+
+        return finalDates;
+
+
     }
 }

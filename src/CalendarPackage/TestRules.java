@@ -2,18 +2,22 @@ package CalendarPackage;
 
 
 import CalendarPackage.EventsPackage.*;
+import CalendarPackage.RepeatRules.RepeatEveryDays;
 import CalendarPackage.RepeatRules.RepeatEveryMonths;
+import CalendarPackage.RepeatRules.RepeatEveryWeekDay;
 import CalendarPackage.RepeatRules.RepeatRule;
 
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class TestRules {
 
     public static void main(String[] args){
 
 
-        testRepeatedTask();
+        testScheduledTask();
 
 
 
@@ -78,8 +82,19 @@ public class TestRules {
 
 
     }
-    public void testScheduledTask(){
+    public static void testScheduledTask(){
+        String name = "Drink Water";
+        String desc = "Title quite self explanatory";
+        float importance = 5;
+        System.out.println("Creating new Repeated Task");
 
+        ScheduledTask task = new ScheduledTask(name,desc,importance,50, LocalTime.now());
+        task.addRepeatRule(new RepeatEveryDays(3));
+       // task.addExceptionRule(new RepeatEveryDays(10));
+        task.addExceptionRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
+        for (LocalDateTime time: task.getAllDates(LocalDate.now().plusMonths(1))){
+            System.out.println(time);
+        }
     }
 
 

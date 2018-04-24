@@ -51,7 +51,7 @@ public class RepeatEveryDays implements RepeatRule {
         LocalDate temp = startDate.plusDays(nDays);
         while (!temp.isAfter(endDate)){
             dates.add(temp);
-            temp = startDate.plusDays(nDays);
+            temp = temp.plusDays(nDays);
         }
 
         return dates;

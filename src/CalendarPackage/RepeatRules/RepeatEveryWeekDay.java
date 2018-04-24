@@ -53,7 +53,7 @@ public class RepeatEveryWeekDay implements RepeatRule{
         LocalDate temp = startDate.with(TemporalAdjusters.next(weekDay));
         while (!temp.isAfter(endDate)){
             dates.add(temp);
-            temp = temp = startDate.with(TemporalAdjusters.next(weekDay));
+            temp = temp.with(TemporalAdjusters.next(weekDay));
         }
 
         return dates;

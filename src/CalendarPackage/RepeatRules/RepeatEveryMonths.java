@@ -64,7 +64,7 @@ public class RepeatEveryMonths implements RepeatRule {
             if(temp.getDayOfMonth()!=startDate.getDayOfMonth())
                 continue;
             dates.add(temp);
-            temp = startDate.plusMonths(nMonths);
+            temp = temp.plusMonths(nMonths);
         }
 
         return dates;
