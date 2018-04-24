@@ -4,7 +4,10 @@ import CalendarPackage.Day;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  *
@@ -46,4 +49,26 @@ public class RepeatEveryNWeekDayOfMonth implements RepeatRule {
 
         return false;
     }
+
+    @Override
+    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+
+        List<LocalDate> dates = new ArrayList<>();
+
+        if(startDate.with(TemporalAdjusters.dayOfWeekInMonth(indexOfWeek,weekDay)).isEqual(startDate)){
+            dates.add(startDate);
+        }
+        LocalDate temp = startDate.with(TemporalAdjusters.firstDayOfNextMonth()).with(TemporalAdjusters.dayOfWeekInMonth(indexOfWeek,weekDay));
+        while (!temp.isAfter(endDate)){
+            dates.add(temp);
+            temp = temp.with(TemporalAdjusters.firstDayOfNextMonth()).with(TemporalAdjusters.dayOfWeekInMonth(indexOfWeek,weekDay));
+        }
+
+        return dates;
+
+
+
+    }
+
+
 }

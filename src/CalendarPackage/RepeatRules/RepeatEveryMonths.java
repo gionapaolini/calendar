@@ -4,6 +4,9 @@ import CalendarPackage.Day;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.time.temporal.TemporalAdjusters;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /*
@@ -47,4 +50,27 @@ public class RepeatEveryMonths implements RepeatRule {
 
         return false;
     }
+
+    @Override
+    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+
+        List<LocalDate> dates = new ArrayList<>();
+
+
+        dates.add(startDate);
+
+        LocalDate temp = startDate.plusMonths(nMonths);
+        while (!temp.isAfter(endDate)){
+            if(temp.getDayOfMonth()!=startDate.getDayOfMonth())
+                continue;
+            dates.add(temp);
+            temp = startDate.plusMonths(nMonths);
+        }
+
+        return dates;
+
+
+
+    }
+
 }

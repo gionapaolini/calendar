@@ -1,10 +1,14 @@
+package CalendarPackage;
+
+import CalendarPackage.EventsPackage.Event;
+
 import java.awt.Color;
 import java.util.List;
 
 public class Label {
     private Color color;
     private String name;
-    private List<Task> taskList;
+    private List<Event> events;
 
     public Label(Color color, String name) {
         this.color = color;
@@ -27,14 +31,14 @@ public class Label {
         this.name = name;
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public List<Event> getEventList() {
+        return events;
     }
 
-    public void addTask(Task task) {
-        this.taskList.add(task);
+    public void addEvent(Event event) {
+        this.events.add(event);
     }
-    public void removeTask(Task task) {
-        this.taskList.remove(task);
+    public void removeEvent(Event event) {
+        this.events.remove(event);
     }
 }

@@ -4,6 +4,8 @@ import CalendarPackage.Day;
 
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  *
@@ -38,4 +40,26 @@ public class RepeatEveryWeeks implements RepeatRule {
 
         return false;
     }
+
+
+    @Override
+    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+
+        List<LocalDate> dates = new ArrayList<>();
+
+
+        dates.add(startDate);
+
+        LocalDate temp = startDate.plusWeeks(nWeeks);
+        while (!temp.isAfter(endDate)){
+            dates.add(temp);
+            temp = startDate.plusWeeks(nWeeks);
+        }
+
+        return dates;
+
+
+
+    }
+
 }
