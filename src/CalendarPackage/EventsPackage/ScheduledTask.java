@@ -150,12 +150,14 @@ public class ScheduledTask extends Event{
         List<LocalDate> fromRules = null;
         List<LocalDate> fromException = null;
 
+        //If there are repeated rules create a new list to put all dates from the rules together
         if(repeatRules!=null){
             fromRules = new ArrayList<>();
             for(RepeatRule rule: repeatRules){
                 fromRules.addAll(rule.getValidDates(startDate,endOfCalendar));
             }
         }
+        //If there are exception rules create a new list to put all dates from the exception together
         if(exceptionRules!=null){
             fromException = new ArrayList<>();
             for(RepeatRule rule: exceptionRules){
@@ -164,10 +166,12 @@ public class ScheduledTask extends Event{
         }
 
         List<LocalDateTime> goodDates = new ArrayList<>();
+        //If there are specific dates add all those date to the new list of valid date
         if(specificDates!=null){
             goodDates.addAll(specificDates);
         }
 
+        //Compare the dates from the rules with the exception, discarding the dates that are present in the exception list
         if((fromRules != null) && (fromException !=null)) {
             checkException:
             for (LocalDate date1 : fromRules) {
@@ -182,6 +186,7 @@ public class ScheduledTask extends Event{
             }
 
         }else if(fromRules!=null){
+            //if there are no exceptions, then don't discard any date from the rules
             for (LocalDate date : fromRules) {
                 goodDates.add(LocalDateTime.of(date, time));
             }
@@ -189,6 +194,7 @@ public class ScheduledTask extends Event{
 
         List<LocalDateTime> finalDates = new ArrayList<>();
 
+        //last check against the specific exceptions
         if(specificException!=null){
             checkException2:
             for(LocalDateTime date: goodDates) {
@@ -206,7 +212,9 @@ public class ScheduledTask extends Event{
             finalDates = goodDates;
         }
 
+        //discard duplicates
         finalDates = finalDates.stream().distinct().collect(Collectors.toList());
+        //sort the dates
         finalDates.sort((LocalDateTime p1, LocalDateTime p2) -> p1.isBefore(p2)?-1:1);
 
 
