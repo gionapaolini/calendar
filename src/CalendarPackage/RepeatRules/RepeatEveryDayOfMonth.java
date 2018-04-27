@@ -27,10 +27,7 @@ public class RepeatEveryDayOfMonth implements RepeatRule {
 
     int dayOfMonth;
 
-    public RepeatEveryDayOfMonth(int day) throws Exception{
-
-        if(day<1 || day>31)
-            throw new Exception("WTF - Days are wrong dude");
+    public RepeatEveryDayOfMonth(int day){
 
         this.dayOfMonth = day;
     }

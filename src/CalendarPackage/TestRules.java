@@ -2,15 +2,14 @@ package CalendarPackage;
 
 
 import CalendarPackage.EventsPackage.*;
-import CalendarPackage.RepeatRules.RepeatEveryDays;
-import CalendarPackage.RepeatRules.RepeatEveryMonths;
-import CalendarPackage.RepeatRules.RepeatEveryWeekDay;
-import CalendarPackage.RepeatRules.RepeatRule;
+import CalendarPackage.RepeatRules.*;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TestRules {
 
@@ -18,6 +17,9 @@ public class TestRules {
 
 
         testScheduledTask();
+
+
+
 
 
 
@@ -89,12 +91,19 @@ public class TestRules {
         System.out.println("Creating new Repeated Task");
 
         ScheduledTask task = new ScheduledTask(name,desc,importance,50, LocalTime.now());
-        task.addRepeatRule(new RepeatEveryDays(3));
-       // task.addExceptionRule(new RepeatEveryDays(10));
-        task.addExceptionRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
-        for (LocalDateTime time: task.getAllDates(LocalDate.now().plusMonths(1))){
-            System.out.println(time);
+        task.addRepeatRule(new RepeatEveryDayOfMonth(11));
+        task.addRepeatRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
+        task.addRepeatRule(new RepeatEveryDayOfMonth(12));
+
+        // task.addExceptionRule(new RepeatEveryDays(10));
+       // task.addExceptionRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
+        for (LocalDateTime time: task.getAllDates(LocalDate.now().plusMonths(5))){
+            System.out.println(time.getDayOfMonth()+" "+time.getMonth()+", "+time.getDayOfWeek());
+
         }
+
+
+
     }
 
 

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ScheduledTask extends Event{
 
@@ -145,7 +146,6 @@ public class ScheduledTask extends Event{
     }
 
     public List<LocalDateTime> getAllDates(LocalDate endOfCalendar){
-        System.out.println("HERE");
 
         List<LocalDate> fromRules = null;
         List<LocalDate> fromException = null;
@@ -162,11 +162,6 @@ public class ScheduledTask extends Event{
                 fromException.addAll(rule.getValidDates(startDate,endOfCalendar));
             }
         }
-
-
-
-
-
 
         List<LocalDateTime> goodDates = new ArrayList<>();
         if(specificDates!=null){
@@ -210,6 +205,9 @@ public class ScheduledTask extends Event{
         }else {
             finalDates = goodDates;
         }
+
+        finalDates = finalDates.stream().distinct().collect(Collectors.toList());
+        finalDates.sort((LocalDateTime p1, LocalDateTime p2) -> p1.isBefore(p2)?-1:1);
 
 
         return finalDates;
