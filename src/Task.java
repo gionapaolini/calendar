@@ -1,4 +1,4 @@
-import CalendarPackage.Label;
+import CalendarPackage.EventsPackage.Label;
 
 import java.util.List;
 

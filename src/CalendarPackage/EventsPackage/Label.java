@@ -1,6 +1,4 @@
-package CalendarPackage;
-
-import CalendarPackage.EventsPackage.Event;
+package CalendarPackage.EventsPackage;
 
 import java.awt.Color;
 import java.util.List;

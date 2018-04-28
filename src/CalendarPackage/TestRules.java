@@ -123,11 +123,18 @@ public class TestRules {
         task.addRepeatRule(onlySaturdayFirstMonth);
         task.addRepeatRule(onlySundayFirstMonth);
 
-        InstanceRepeatRule from18to8everydat = new InstanceRepeatRule(RuleMaker.getRuleDays(1),LocalDate.of(2018,Month.JUNE,18),timeForGym,LocalDate.of(2018,Month.JULY,8));
+        InstanceRepeatRule from18to8everyday = new InstanceRepeatRule(RuleMaker.getRuleDays(1),LocalDate.of(2018,Month.JUNE,18),timeForGym,LocalDate.of(2018,Month.JULY,8));
 
-        task.addExceptionRule(from18to8everydat);
+        task.addExceptionRule(from18to8everyday);
         cal.addTask(task);
+      //  cal.printTaskFromTo(LocalDate.now(),LocalDate.now().plusYears(7));
+
+
+        task.removeExceptionRule(from18to8everyday);
+
+        cal.updateTask(task);
         cal.printTaskFromTo(LocalDate.now(),LocalDate.now().plusYears(7));
+
     }
 
 
