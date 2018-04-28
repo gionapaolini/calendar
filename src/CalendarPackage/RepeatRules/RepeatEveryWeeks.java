@@ -1,6 +1,8 @@
 package CalendarPackage.RepeatRules;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,16 +30,16 @@ public class RepeatEveryWeeks implements RepeatRule {
 
 
     @Override
-    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+    public List<LocalDateTime> getValidDates(LocalDate startDate, LocalTime time, LocalDate endDate) {
 
-        List<LocalDate> dates = new ArrayList<>();
+        List<LocalDateTime> dates = new ArrayList<>();
 
 
-        dates.add(startDate);
+        dates.add(LocalDateTime.of(startDate,time));
 
         LocalDate temp = startDate.plusWeeks(nWeeks);
         while (!temp.isAfter(endDate)){
-            dates.add(temp);
+            dates.add(LocalDateTime.of(temp,time));
             temp = temp.plusWeeks(nWeeks);
         }
 

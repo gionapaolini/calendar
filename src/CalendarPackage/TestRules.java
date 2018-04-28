@@ -4,9 +4,7 @@ package CalendarPackage;
 import CalendarPackage.EventsPackage.*;
 import CalendarPackage.RepeatRules.*;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.time.*;
 
 
 public class TestRules {
@@ -89,9 +87,6 @@ public class TestRules {
         System.out.println("Creating new Repeated Task");
 
         ScheduledTask task = new ScheduledTask(name,desc,importance,50, LocalDateTime.now());
-        task.addRepeatRule(new RepeatEveryDayOfMonth(11));
-        task.addRepeatRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
-        task.addRepeatRule(new RepeatEveryDayOfMonth(12));
 
         // task.addExceptionRule(new RepeatEveryDays(10));
        // task.addExceptionRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
@@ -106,16 +101,31 @@ public class TestRules {
 
     public static void testCalendar(){
         Calendar cal = new Calendar();
-        String name = "Drink Water";
+        String name = "Gym";
         String desc = "Title quite self explanatory";
         float importance = 5;
         System.out.println("Creating new Scheduled Task");
-        ScheduledTask task = new ScheduledTask(name,desc,importance,60,LocalDateTime.now().plusDays(4));
-        task.addRepeatRule(RuleMaker.getRuleDays(2));
-        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.MONDAY));
-        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.TUESDAY));
-        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.WEDNESDAY));
+        LocalTime timeForGym = LocalTime.now();
 
+        InstanceRepeatRule onlyMondayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.MONDAY),LocalDate.now(),timeForGym,LocalDate.now().plusMonths(2));
+        InstanceRepeatRule onlyWednesdayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.WEDNESDAY),LocalDate.now(),timeForGym,LocalDate.now().plusMonths(2));
+        InstanceRepeatRule onlyFridayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.FRIDAY),LocalDate.now(),timeForGym,LocalDate.now().plusMonths(2));
+
+
+        ScheduledTask task = new ScheduledTask(name,desc,importance,60,onlyMondayFirstMonth);
+
+
+        task.addRepeatRule(onlyWednesdayFirstMonth);
+        task.addRepeatRule(onlyFridayFirstMonth);
+
+        InstanceRepeatRule onlySaturdayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.SATURDAY),LocalDate.now().plusMonths(2),timeForGym,LocalDate.now().plusMonths(4));
+        InstanceRepeatRule onlySundayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.SUNDAY),LocalDate.now().plusMonths(2),timeForGym,LocalDate.now().plusMonths(4));
+        task.addRepeatRule(onlySaturdayFirstMonth);
+        task.addRepeatRule(onlySundayFirstMonth);
+
+        InstanceRepeatRule from18to8everydat = new InstanceRepeatRule(RuleMaker.getRuleDays(1),LocalDate.of(2018,Month.JUNE,18),timeForGym,LocalDate.of(2018,Month.JULY,8));
+
+        task.addExceptionRule(from18to8everydat);
         cal.addTask(task);
         cal.printTaskFromTo(LocalDate.now(),LocalDate.now().plusYears(7));
     }

@@ -2,6 +2,8 @@ package CalendarPackage.RepeatRules;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,16 +33,16 @@ public class RepeatEveryWeekDay implements RepeatRule{
 
 
     @Override
-    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+    public List<LocalDateTime> getValidDates(LocalDate startDate, LocalTime time, LocalDate endDate) {
 
-        List<LocalDate> dates = new ArrayList<>();
+        List<LocalDateTime> dates = new ArrayList<>();
 
         if(startDate.getDayOfWeek() == weekDay ){
-            dates.add(startDate);
+            dates.add(LocalDateTime.of(startDate,time));
         }
         LocalDate temp = startDate.with(TemporalAdjusters.next(weekDay));
         while (!temp.isAfter(endDate)){
-            dates.add(temp);
+            dates.add(LocalDateTime.of(temp,time));
             temp = temp.with(TemporalAdjusters.next(weekDay));
         }
 

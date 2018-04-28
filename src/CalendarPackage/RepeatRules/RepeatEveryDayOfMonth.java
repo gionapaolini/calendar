@@ -1,6 +1,8 @@
 package CalendarPackage.RepeatRules;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,12 +41,12 @@ public class RepeatEveryDayOfMonth implements RepeatRule {
 
 
     @Override
-    public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
+    public List<LocalDateTime> getValidDates(LocalDate startDate, LocalTime time, LocalDate endDate) {
 
-        List<LocalDate> dates = new ArrayList<>();
+        List<LocalDateTime> dates = new ArrayList<>();
 
         if(startDate.getDayOfMonth()==dayOfMonth){
-            dates.add(startDate);
+            dates.add(LocalDateTime.of(startDate,time));
         }
 
         LocalDate temp = startDate;
@@ -63,7 +65,7 @@ public class RepeatEveryDayOfMonth implements RepeatRule {
 
 
         while (!temp.isAfter(endDate)){
-            dates.add(temp);
+            dates.add(LocalDateTime.of(temp,time));
             addMonth=1;
             do {
                 caught=false;
