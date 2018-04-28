@@ -1,7 +1,5 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -27,19 +25,6 @@ public class RepeatEveryWeeks implements RepeatRule {
         this.nWeeks = nWeeks;
     }
 
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
-
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        long gap = ChronoUnit.DAYS.between(startDate, day.getDateOfDay());
-
-        if((gap/7)%nWeeks==0)
-            return true;
-
-        return false;
-    }
 
 
     @Override
@@ -62,4 +47,11 @@ public class RepeatEveryWeeks implements RepeatRule {
 
     }
 
+    public int getnWeeks() {
+        return nWeeks;
+    }
+
+    public void setnWeeks(int nWeeks) {
+        this.nWeeks = nWeeks;
+    }
 }

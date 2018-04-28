@@ -7,16 +7,14 @@ import CalendarPackage.RepeatRules.*;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
+
 
 public class TestRules {
 
     public static void main(String[] args){
 
 
-        testScheduledTask();
+        testCalendar();
 
 
 
@@ -32,7 +30,7 @@ public class TestRules {
         String desc = "Title quite self explanatory";
         float importance = 5;
         System.out.println("Creating new Habit");
-        Habit h1 = new Habit(name,desc,importance,HabitType.Positive);
+        Habit h1 = new Habit(name,desc,importance,HabitType.POSITIVE);
 
         h1.occur();
         h1.occur();
@@ -71,7 +69,7 @@ public class TestRules {
         float importance = 5;
         System.out.println("Creating new Repeated Task");
 
-        RepeatedTask r1 = new RepeatedTask(name,desc,importance,RepeatedType.Yearly,LocalDate.now());
+        RepeatedTask r1 = new RepeatedTask(name,desc,importance,RepeatedType.YEARLY,LocalDate.now());
         System.out.println(r1.isDone());
         r1.doTask();
         System.out.println(r1.isDone());
@@ -90,7 +88,7 @@ public class TestRules {
         float importance = 5;
         System.out.println("Creating new Repeated Task");
 
-        ScheduledTask task = new ScheduledTask(name,desc,importance,50, LocalTime.now());
+        ScheduledTask task = new ScheduledTask(name,desc,importance,50, LocalDateTime.now());
         task.addRepeatRule(new RepeatEveryDayOfMonth(11));
         task.addRepeatRule(new RepeatEveryWeekDay(DayOfWeek.MONDAY));
         task.addRepeatRule(new RepeatEveryDayOfMonth(12));
@@ -106,7 +104,21 @@ public class TestRules {
 
     }
 
+    public static void testCalendar(){
+        Calendar cal = new Calendar();
+        String name = "Drink Water";
+        String desc = "Title quite self explanatory";
+        float importance = 5;
+        System.out.println("Creating new Scheduled Task");
+        ScheduledTask task = new ScheduledTask(name,desc,importance,60,LocalDateTime.now().plusDays(4));
+        task.addRepeatRule(RuleMaker.getRuleDays(2));
+        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.MONDAY));
+        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.TUESDAY));
+        task.addExceptionRule(RuleMaker.getRuleWeekDay(DayOfWeek.WEDNESDAY));
 
+        cal.addTask(task);
+        cal.printTaskFromTo(LocalDate.now(),LocalDate.now().plusYears(7));
+    }
 
 
 }

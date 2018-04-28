@@ -1,10 +1,7 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,18 +34,23 @@ public class RepeatEveryNWeekDayOfMonth implements RepeatRule {
         this.indexOfWeek = indexOfWeek;
     }
 
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
-
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        if(day.getDateOfDay().isEqual(day.getDateOfDay().with(TemporalAdjusters.dayOfWeekInMonth(indexOfWeek,weekDay)))){
-            return true;
-        }
-
-        return false;
+    public DayOfWeek getWeekDay() {
+        return weekDay;
     }
+
+    public void setWeekDay(DayOfWeek weekDay) {
+        this.weekDay = weekDay;
+    }
+
+    public int getIndexOfWeek() {
+        return indexOfWeek;
+    }
+
+    public void setIndexOfWeek(int indexOfWeek) {
+        this.indexOfWeek = indexOfWeek;
+    }
+
+
 
     @Override
     public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {

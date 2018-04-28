@@ -1,7 +1,5 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.temporal.TemporalAdjusters;
@@ -30,17 +28,7 @@ public class RepeatEveryWeekDay implements RepeatRule{
         this.weekDay = weekDay;
     }
 
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
 
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        if(day.getDateOfDay().getDayOfWeek()==weekDay)
-            return true;
-
-        return false;
-    }
 
     @Override
     public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
@@ -60,5 +48,13 @@ public class RepeatEveryWeekDay implements RepeatRule{
 
 
 
+    }
+
+    public DayOfWeek getWeekDay() {
+        return weekDay;
+    }
+
+    public void setWeekDay(DayOfWeek weekDay) {
+        this.weekDay = weekDay;
     }
 }

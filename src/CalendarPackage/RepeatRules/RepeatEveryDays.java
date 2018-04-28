@@ -1,7 +1,5 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
@@ -27,17 +25,12 @@ public class RepeatEveryDays implements RepeatRule {
         this.nDays = nDays;
     }
 
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
+    public int getnDays() {
+        return nDays;
+    }
 
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        long gap = ChronoUnit.DAYS.between(startDate, day.getDateOfDay());
-        if(gap%nDays==0)
-            return true;
-
-        return false;
+    public void setnDays(int nDays) {
+        this.nDays = nDays;
     }
 
     @Override

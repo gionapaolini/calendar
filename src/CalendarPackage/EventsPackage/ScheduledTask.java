@@ -1,6 +1,5 @@
 package CalendarPackage.EventsPackage;
 
-import CalendarPackage.Day;
 import CalendarPackage.RepeatRules.RepeatRule;
 
 import java.time.LocalDate;
@@ -19,15 +18,23 @@ public class ScheduledTask extends Event{
     private List<LocalDateTime> specificException;
     private LocalDate startDate;
     private LocalTime time;
-    private List<Day> days;
 
 
-    public ScheduledTask(String name, String description, float importance, int minDuration, LocalTime time) {
+    public ScheduledTask(String name, String description, float importance, int minDuration, LocalDateTime specificDate) {
         super(name, description, importance);
         this.minDuration = minDuration;
         this.startDate = LocalDate.now();
-        days = new ArrayList<>();
-        this.time=time;
+        this.time = LocalTime.now();
+        addSpecificDate(specificDate);
+    }
+
+    public ScheduledTask(String name, String description, float importance, int minDuration, RepeatRule firstRule) {
+        super(name, description, importance);
+        this.minDuration = minDuration;
+        this.startDate = LocalDate.now();
+        this.time = LocalTime.now();
+        addRepeatRule(firstRule);
+
     }
 
     public int getMinDuration() {
@@ -46,19 +53,7 @@ public class ScheduledTask extends Event{
         this.startDate = startDate;
     }
 
-    public void addDay(Day day){
-        days.add(day);
-    }
 
-    public void removeDay(Day day){
-        days.remove(day);
-    }
-
-    public void removeFromAllDays(){
-        for(Day day: days){
-            days.remove(this);
-        }
-    }
 
     public void addRepeatRule(RepeatRule rule){
         if(repeatRules == null){
@@ -139,10 +134,6 @@ public class ScheduledTask extends Event{
 
     public List<LocalDateTime> getSpecificException() {
         return specificException;
-    }
-
-    public List<Day> getDays() {
-        return days;
     }
 
     public List<LocalDateTime> getAllDates(LocalDate endOfCalendar){

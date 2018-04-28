@@ -48,19 +48,19 @@ public class RepeatedTask extends SimpleTask {
             return false;
 
         switch (type){
-            case Daily:
+            case DAILY:
                 if(occurred.get(occurred.size()-1).isAfter(now.withHour(0).withMinute(0)))
                     return true;
                 break;
-            case Weekly:
+            case WEEKLY:
                 if(occurred.get(occurred.size()-1).isAfter(now.with(TemporalAdjusters.previousOrSame(DayOfWeek.MONDAY)).withHour(0).withMinute(0)))
                     return true;
                 break;
-            case Monthly:
+            case MONTHLY:
                 if(occurred.get(occurred.size()-1).isAfter(now.with(TemporalAdjusters.firstDayOfMonth()).withHour(0).withMinute(0)))
                     return true;
                 break;
-            case Yearly:
+            case YEARLY:
                 if(occurred.get(occurred.size()-1).isAfter(now.with(TemporalAdjusters.firstDayOfYear()).withHour(0).withMinute(0)))
                     return true;
                 break;

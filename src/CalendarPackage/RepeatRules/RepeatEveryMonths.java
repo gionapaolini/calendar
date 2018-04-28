@@ -1,10 +1,7 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,21 +32,6 @@ public class RepeatEveryMonths implements RepeatRule {
         this.nMonths = nMonths;
     }
 
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
-
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        long gap = ChronoUnit.MONTHS.between(startDate, day.getDateOfDay());
-
-        if(gap%nMonths==0){
-            if(startDate.getDayOfMonth()==day.getDateOfDay().getDayOfMonth())
-                return true;
-        }
-
-        return false;
-    }
 
     @Override
     public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
@@ -73,4 +55,11 @@ public class RepeatEveryMonths implements RepeatRule {
 
     }
 
+    public int getnMonths() {
+        return nMonths;
+    }
+
+    public void setnMonths(int nMonths) {
+        this.nMonths = nMonths;
+    }
 }

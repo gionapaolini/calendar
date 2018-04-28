@@ -1,9 +1,6 @@
 package CalendarPackage.RepeatRules;
 
-import CalendarPackage.Day;
-
 import java.time.LocalDate;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,26 +22,21 @@ import java.util.List;
 
 public class RepeatEveryDayOfMonth implements RepeatRule {
 
-    int dayOfMonth;
+    private int dayOfMonth;
 
     public RepeatEveryDayOfMonth(int day){
 
         this.dayOfMonth = day;
     }
 
-
-    @Override
-    public boolean isDayValid(LocalDate startDate, Day day) {
-
-        if(day.getDateOfDay().isBefore(startDate))
-            return false;
-
-        if(day.getDateOfDay().getDayOfMonth() == dayOfMonth){
-            return true;
-        }
-
-        return false;
+    public int getDayOfMonth() {
+        return dayOfMonth;
     }
+
+    public void setDayOfMonth(int dayOfMonth) {
+        this.dayOfMonth = dayOfMonth;
+    }
+
 
     @Override
     public List<LocalDate> getValidDates(LocalDate startDate, LocalDate endDate) {
