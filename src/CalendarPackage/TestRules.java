@@ -120,6 +120,7 @@ public class TestRules {
 
         InstanceRepeatRule onlySaturdayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.SATURDAY),LocalDate.now().plusMonths(2),timeForGym,LocalDate.now().plusMonths(4));
         InstanceRepeatRule onlySundayFirstMonth = new InstanceRepeatRule(RuleMaker.getRuleWeekDay(DayOfWeek.SUNDAY),LocalDate.now().plusMonths(2),timeForGym,LocalDate.now().plusMonths(4));
+
         task.addRepeatRule(onlySaturdayFirstMonth);
         task.addRepeatRule(onlySundayFirstMonth);
 

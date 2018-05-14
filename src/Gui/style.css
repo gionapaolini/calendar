@@ -1,0 +1,9 @@
+.timeSlot {
+   -fx-fill:transparent;
+
+}
+
+.timeSlot:hover {
+  -fx-fill:#dae7f3;
+}
+

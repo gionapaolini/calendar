@@ -17,17 +17,21 @@ public class ScheduledTask extends Event{
     private List<LocalDateTime> specificDates;
     private List<LocalDateTime> specificException;
 
+    private List<InstanceScheduledTask> instances;
+
 
     public ScheduledTask(String name, String description, float importance, int minDuration, LocalDateTime specificDate) {
         super(name, description, importance);
         this.minDuration = minDuration;
         addSpecificDate(specificDate);
+        instances = new ArrayList<>();
     }
 
     public ScheduledTask(String name, String description, float importance, int minDuration, InstanceRepeatRule firstRule) {
         super(name, description, importance);
         this.minDuration = minDuration;
         addRepeatRule(firstRule);
+        instances = new ArrayList<>();
 
     }
 
@@ -196,4 +200,16 @@ public class ScheduledTask extends Event{
 
 
     }
+
+    public List<InstanceScheduledTask> generateInstances(LocalDate endOfCalendar){
+        instances.clear();
+        List<LocalDateTime> dates = getAllDates(endOfCalendar);
+        dates.forEach(dateTime -> {
+            instances.add(new InstanceScheduledTask(this,dateTime));
+        });
+        return instances;
+
+    }
+
+
 }
